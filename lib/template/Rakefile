@@ -1,0 +1,37 @@
+require 'dm-migrations'
+require 'rspec'
+require 'rspec/core/rake_task'
+require "roodi"
+require "roodi_task"
+require 'rake'
+require "rake/clean"
+
+ENV['DIRECTORIES_TO_CALCULATE'] = 'routes/,helpers/,models/'
+require 'code_statistics'
+
+RoodiTask.new() do | t |
+t.patterns = %w(**/*.rb)
+t.config = "roodi.yml"
+end
+
+CLEAN.include('*.tmp','*.old')
+CLOBBER.include('*.tmp', 'build/*','#*#')
+
+RSpec::Core::RakeTask.new(:spec)
+
+desc "List all routes for this application"
+task :routes do
+  puts `grep '^[get|post|put|delete].*do$' routes/*.rb | sed 's/ do$//'`
+end
+
+desc "auto migrates the database"
+task :migrate do
+  require './main'
+  DataMapper.auto_migrate!
+end
+
+desc "auto upgrades the database"
+task :upgrade do
+  require './main'
+  DataMapper.auto_upgrade! 
+end

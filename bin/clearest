@@ -1,0 +1,6 @@
+require 'clearest'
+
+table = 'othermovies'
+dsn = 'sqlite:///tmp/base_project.db'
+Clearest::ApplicationBuilder::new :table_name => table, :dsn => dsn, :project_name => 'testing', :target_path => '/tmp'
+Clearest::ServiceBuilder::new :table_name => table, :dsn => dsn, :project_name => 'testing', :target_path => '/tmp'

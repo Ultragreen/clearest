@@ -1,0 +1,12 @@
+module Clearest
+  class ApplicationBuilder
+    def initialize(_options = {})
+      _options[:template_map] = {
+        'main.rb' => [:dsn]
+      }
+      FoldersGenerator::new _options
+      FilesCopyGenerator::new _options
+      SourcesGenerator::new _options
+    end
+  end
+end

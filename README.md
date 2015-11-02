@@ -1,6 +1,6 @@
 # Clearest
 
-TODO: Write a gem description
+Clearest : Ruby Rack RESTfull services generator
 
 ## Installation
 

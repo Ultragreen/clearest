@@ -3,7 +3,6 @@ module Clearest
     def initialize(_options = {})
       super _options
       fullpath = "#{@options[:target_path]}"
-
       @options[:test_db_filename] ||= '/tmp/clearest.db'
       @options[:template_map].each do |template,list|
         file_target = (@options[:table_name])? template.sub('TABLE_NAME', @options[:table_name]) : template

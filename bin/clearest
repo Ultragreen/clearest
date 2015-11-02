@@ -1,6 +1,41 @@
+#!/usr/bin/env ruby
 require 'clearest'
+require 'thor'
 
-table = 'othermovies'
-dsn = 'sqlite:///tmp/base_project.db'
-Clearest::ApplicationBuilder::new :table_name => table, :dsn => dsn, :project_name => 'testing', :target_path => '/tmp'
-Clearest::ServiceBuilder::new :table_name => table, :dsn => dsn, :project_name => 'testing', :target_path => '/tmp'
+module CleaRESTCLI
+  class Application < Thor
+    desc "new <name> <dsn>", "Adds a new CleaREST application"
+    def new(name,dsn)
+      Clearest::ApplicationBuilder::new :project_name => name, :target_path => '.', :dsn => dsn
+    end
+
+    desc "show", "Display information on the current application"
+    def show
+    end
+  end
+
+
+  class Services < Thor
+    desc "add <table>", "Adds the new service named <table> to the current application"
+    def add(table)
+      app = Clearest::Validators::Applications::check :path => '.'
+      Clearest::ServiceBuilder::new :table_name => table, :dsn => app[:dsn], :project_name => app[:project_name], :target_path => '.'
+    end
+    desc "remove <name>", "remove service <name> of the current application"
+    def remove(name)
+
+    end
+
+  end
+
+  class CleaREST < Thor
+    desc "application SUBCOMMAND ...ARGS", "manage CleaREST application"
+    subcommand "application", Application
+    desc "services SUBCOMMAND ...ARGS", "manage services in application"
+    subcommand "services", Services
+  end
+end
+
+CleaRESTCLI::CleaREST.start(ARGV)
+
+

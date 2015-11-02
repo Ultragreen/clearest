@@ -1,3 +1,4 @@
+require 'version'
 module Clearest
-  VERSION = "0.0.1"
+  is_versioned
 end

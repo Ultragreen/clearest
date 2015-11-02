@@ -1,3 +1,3 @@
-require_relative 'rack-rest-rspec/rspec'
+require 'rack-rest-rspec/prepare'
 
 

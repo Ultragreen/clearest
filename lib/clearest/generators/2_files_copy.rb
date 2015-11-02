@@ -3,7 +3,7 @@ module Clearest
     def initialize(_options = {})
       super _options
       @options[:list_folder].each do |folder|
-        files = Dir.glob("template/#{folder}/*").reject {|file| (file =~ /.tpl$/ or File::directory? file) }
+        files = Dir.glob("#{@template_root}/#{folder}/*").reject {|file| (file =~ /.tpl$/ or File::directory? file) }
         files.each do |file|
           fullpath = "#{@options[:target_path]}/#{@options[:project_name]}/#{folder}"
           puts "     #{'copying'.colorize(:light_green)}  (file)       #{fullpath}/#{File.basename(file)}"

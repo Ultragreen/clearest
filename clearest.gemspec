@@ -26,4 +26,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'code_statistics', '~> 0.2', '>= 0.2.13'
   spec.add_development_dependency 'yard-rspec', '~> 0.1'
 
+
+  spec.add_dependency 'dm-is-reflective', '= 1.2.0'
+  spec.add_dependency 'colorize', '~> 0.7', '>= 0.7.7'
+  spec.add_dependency 'dm-sqlite-adapter', '~> 1.2', '>= 1.2.0'
+#  spec.add_development_dependency "bundler_geminabox", "~> 0.2",'>= 0.2.0'	
+  spec.add_development_dependency "version", "~> 1.0",'>= 1.0.0'	
+
 end
